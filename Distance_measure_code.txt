@@ -1,0 +1,43 @@
+Google Maps Script 
+
+
+=====================================
+function GOOGLEMAPS(origin,destination) {
+  
+  origin = "Datta Mandir Road, Wakad Pune";
+  destination = "Hinjewadi PhaseI, Pune";
+  
+  var mapObj = Maps.newDirectionFinder();
+  mapObj.setOrigin(origin);
+  mapObj.setDestination(destination);
+  var directions = mapObj.getDirections(); 
+  
+  var meters = directions["routes"][0]["legs"][0]["distance"]["value"];
+  var distance = meters * 0.001; 
+  Logger.log(distance);
+  
+}
+
+==========================================
+
+function GOOGLEMAPS(origin,destination,return_type) {
+  
+  var mapObj = Maps.newDirectionFinder();
+  mapObj.setOrigin(origin);
+  mapObj.setDestination(destination);
+  var directions = mapObj.getDirections(); 
+  
+  var getTheLeg = directions["routes"][0]["legs"][0];
+
+  var meters = getTheLeg["distance"]["value"];
+
+  switch(return_type){
+  case "km":
+   return meters * 0.001;
+   break;
+  default:
+    return "Error: Wrong Unit ";
+
+  }
+   
+}
